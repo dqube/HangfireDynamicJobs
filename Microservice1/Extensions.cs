@@ -9,7 +9,11 @@ namespace Microservice1
             IRecurringJobManager manager = new RecurringJobManager(); // or obtain instance using dependency injection
 
             manager.AddOrUpdateDynamic<INewsletterSender>("newsletter-sender", x => x.SendNewsLetter(1), Cron.Never());
-
+            //manager.AddOrUpdateDynamic<INewsletterSender>("newsletter-sender", x => x.SendNewsLetter(1), Cron.Never(), new DynamicRecurringJobOptions()
+            //{
+            //    Filters = new[] { new LogJobsAttribute() },
+            //    TimeZone = TimeZoneInfo.Local
+            //});
         }
     }
 }

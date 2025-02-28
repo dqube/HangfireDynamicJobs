@@ -1,9 +1,14 @@
-﻿namespace Microservice2;
+﻿using Hangfire;
 
+namespace Microservice2;
+
+[LogJobs]
+[Queue("ordersubmitter")]
 public class OrderSubmitter : IOrderSubmitter
 {
-    public void SubmitOrder(long orderId, string status)
+    [DisableConcurrentExecution(60)]
+    public void SubmitOrder()
     {
-        Console.WriteLine($"Submitting order {orderId} with status {status}");
+        Console.WriteLine($"Submitting order");
     }
 }
